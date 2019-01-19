@@ -89,7 +89,7 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
         <div class="row justify-content-md-center">
             <div class="mbr-white col-md-10">
                 <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1">
-                    iniciando proyecto </h1>
+                    terminando proyecto </h1>
                 
                 <p class="mbr-text pb-3 mbr-fonts-style display-5">
                     Click any text to edit or style it. Select text to insert a link. Click blue "Gear" icon in the top right corner to hide/show buttons, text, title and change the block background. Click red "+" in the bottom right corner to add a new block. Use the top left menu to create new pages, sites and add themes.
@@ -322,27 +322,17 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
                 </div>                 
             </div>
 
+            <div class="media-container-row pt-5 mt-2">
             <div class="card p-3 align-center">
                 <div class="wrap">
-                    <div class="pie_progress progress2" role="progressbar" data-goal="<?php while($row=mysqli_fetch_assoc($h1)){
-    echo $row['h1'];
-} ?>">
+                    <div class="pie_progress progress2" role="progressbar" data-goal="95">
                         <p class="pie_progress__number mbr-fonts-style display-5"></p>
                     </div>
                 </div> 
                 <div class="mbr-crt-title pt-3">
-                    <h4 class="card-title py-2 mbr-fonts-style display-5">
-                        HR2</h4>
+                    <h4 class="card-title py-2 mbr-fonts-style display-5">HR2</h4>
                 </div>                 
             </div>
-
-            
-
-            
-
-            
-
-            
         </div>
 </div></section>
 
@@ -354,32 +344,27 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
       <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">Registros de Temperatura y Humedad</h2>
       <h3 class="mbr-section-subtitle mbr-fonts-style align-center pb-5 mbr-light display-5">
             Se presenta a continuacion los ultimos registros que han sido enviados a la base de datos por parte del dispositivo ESP8266 y su coordinacion con el arduino Uno.</h3>
+            <h3 class="mbr-section-subtitle mbr-fonts-style align-center pb-5 mbr-light display-5">modificando</h3>
       <div class="table-wrapper">
         <div class="container scroll">
-          <table class="table isSearch" cellspacing="0">
+          <table class="table">
             <thead>
-              <tr class="table-heads ">
-                  
-                  
-                  
-                  
-              <th class="head-item mbr-fonts-style display-7">
-                      ID</th><th class="head-item mbr-fonts-style display-7">
-                      T1</th><th class="head-item mbr-fonts-style display-7">
-                      T2</th><th class="head-item mbr-fonts-style display-7">
-                          T3</th><th class="head-item mbr-fonts-style display-7">
-                              H1</th><th class="head-item mbr-fonts-style display-7">
-                                  H2</th><th class="head-item mbr-fonts-style display-7">
-                                      H3</th><th class="head-item mbr-fonts-style display-7">
-                                          HR1</th><th class="head-item mbr-fonts-style display-7">
-                      HR2</th></tr>
+              <tr class="table-dark">   
+                <th class="head-item mbr-fonts-style display-7">ID</th>
+                <th class="head-item mbr-fonts-style display-7">T1</th>
+                <th class="head-item mbr-fonts-style display-7">T2</th>
+                <th class="head-item mbr-fonts-style display-7">T3</th>
+                <th class="head-item mbr-fonts-style display-7">H1</th>
+                <th class="head-item mbr-fonts-style display-7">H2</th>
+                <th class="head-item mbr-fonts-style display-7">H3</th>
+                <th class="head-item mbr-fonts-style display-7">HR1</th>
+                <th class="head-item mbr-fonts-style display-7">HR2</th>
+                <th class="head-item mbr-fonts-style display-7">FECHA</th>
+                <th class="head-item mbr-fonts-style display-7">HORA</th>
+            </tr>
             </thead>
 
-            <tbody>
-              
-              
-              
-              
+            <tbody>            
 <?php 
 		$sql="SELECT * FROM ARC ORDER BY ID DESC LIMIT 15";
 		$result=mysqli_query($conexion,$sql);
@@ -397,6 +382,8 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
 			<td><?php echo $mostrar['h3'] ?></td>
 			<td><?php echo $mostrar['hr1'] ?></td>
 			<td><?php echo $mostrar['hr2'] ?></td>
+            <td><?php echo $mostrar['fecha'] ?></td>
+            <td><?php echo $mostrar['hora'] ?></td>
 		</tr>
 	<?php 
 	}
