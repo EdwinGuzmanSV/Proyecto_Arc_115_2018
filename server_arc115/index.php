@@ -5,10 +5,45 @@ $baseDatos="id6216838_lq12001";
 $password="46471";
 $conexion=mysqli_connect($servidor,$usuario,$password,$baseDatos) or die ("Problemas en la conexion");
 $datos=mysqli_query($conexion,"SELECT * from ARC") or die("Problemas en el select:".mysqli_error($conexion));
-$h1=mysqli_query($conexion,"SELECT h1 FROM ARC ORDER BY ID DESC LIMIT 1") or die("Problemas al obtener hr1:".mysqli_error($conexion));
+$ultimos=mysqli_query($conexion,"SELECT * FROM ARC ORDER BY ID DESC LIMIT 1") or die("Problemas al obtener hr1:".mysqli_error($conexion));
 $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or die("Problemas al obtener hr1:".mysqli_error($conexion));
 
-
+while($row=mysqli_fetch_assoc($ultimos)){ 
+    $t1= $row['t1'];
+    $t2= $row['t2'];
+    $t3= $row['t3'];
+    $h1= $row['h1'];
+    $h2= $row['h2'];
+    $h3= $row['h3'];
+    $hr1= $row['hr1'];
+    $hr2= $row['hr2'];
+}
+    //valores clave:
+    if($t1>=0 && $t1<=18){
+        $t1_condition="El ambiente es demasiado frio en el Area 1.";
+        $t1_color="blue";
+    }
+    elseif($t1>=18 && $t1<40){
+        $t1_condition="El ambiente es propicio en el Area 1.";
+        $t1_color="green";
+    }
+    elseif($t1>40) {
+        $t1_condition="La temperatura es demasiado alta, podria dañar el cultivo!.";
+        $t1_color="red";
+    } //t2
+    //valores clave humedades
+    if($h1>=200 && $h1<=500){
+        $h1_condition="El cultivo esta en riesgo, hay demasiada agua";
+        $h1_color="red";
+    }
+    elseif($h1>500 && $h1<=900){
+        $h1_condition="El suelo esta humedo, esta en sus valores permitidos";
+        $h1_color="green";
+    }
+    elseif($h1>900){
+        $h1_condition="Al cultivo le hace falta agua. Esta muy seco!";
+        $h1_color="orange";
+    }
 ?>
 <!DOCTYPE html>
 <html >
@@ -17,11 +52,11 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Mobirise v4.8.10, mobirise.com">
-  <!--<meta http-equiv="Refresh" content="12;url=index.php"> -->
+ <meta http-equiv="Refresh" content="120;url=index.php">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="assets/images/2000px-arduino-logo.svg-122x83.png" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/images/minerva.jpg" type="image/x-icon">
   <meta name="description" content="">
-  <title>Home</title>
+  <title>ARC115_PROYECTO_IoT_FIA_UES</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="assets/tether/tether.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -54,32 +89,42 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
         <div class="menu-logo">
             <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="https://commons.wikimedia.org/wiki/File:Arduino_Logo.svg">
-                         <img src="assets/images/2000px-arduino-logo.svg-122x83.png" alt="Mobirise" title="" style="height: 3.8rem;">
+                    <a href="#">
+                         <img src="assets/images/logo.jpg" alt="minerva" title="" style="height: 3.8rem;">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="https://mobirise.com"><span class="mbri-mobile2 mbr-iconfont mbr-iconfont-btn"></span>
-                        MOBIRISE
+                <span class="navbar-logo">
+                    <a href="#">
+                         <img src="assets/images/2000px-arduino-logo.svg-122x83.png" alt="arduino-logo" title="" style="height: 3.8rem;">
+                    </a>
+                </span>
+                <span class="navbar-logo">
+                    <a href="#">
+                         <img src="assets/images/android.png" alt="arduino-logo" title="" style="height: 3.8rem;">
+                    </a>
+                </span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="#"><span class="mbri-mobile2 mbr-iconfont mbr-iconfont-btn"></span>
+                        ADAPTABLE
                     </a></span>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="https://mobirise.com">
+                    <a class="nav-link link text-white display-4" href="#">
                         <span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>
                         Inicio<br><br></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="https://mobirise.com">
-                        <span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                        Acerca de<br><br></a>
+                    <a class="nav-link link text-white display-4" href="#">
+                        
+                        <br><br></a>
                 </li></ul>
-            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4" href="https://mobirise.com"><span class="mbri-protect mbr-iconfont mbr-iconfont-btn"></span>Conectado</a></div>
+            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4" href="#"><span class="mbri-protect mbr-iconfont mbr-iconfont-btn"></span>Conectado</a></div>
         </div>
     </nav>
 </section>
 
-<section class="engine"><a href="https://mobirise.info/g">build a website for free</a></section><section class="cid-qTkA127IK8 mbr-fullscreen mbr-parallax-background" id="header2-1">
+<section class="engine"><a href="#">build a website for free</a></section><section class="cid-qTkA127IK8 mbr-fullscreen mbr-parallax-background" id="header2-1">
 
     
 
@@ -89,13 +134,13 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
         <div class="row justify-content-md-center">
             <div class="mbr-white col-md-10">
                 <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1">
-                    terminando proyecto </h1>
+                    iniciando proyecto </h1>
                 
                 <p class="mbr-text pb-3 mbr-fonts-style display-5">
                     Click any text to edit or style it. Select text to insert a link. Click blue "Gear" icon in the top right corner to hide/show buttons, text, title and change the block background. Click red "+" in the bottom right corner to add a new block. Use the top left menu to create new pages, sites and add themes.
                 </p>
-                <div class="mbr-section-btn"><a class="btn btn-md btn-secondary display-4" href="https://mobirise.com">LEARN MORE</a>
-                    <a class="btn btn-md btn-white-outline display-4" href="https://mobirise.com">LIVE DEMO</a></div>
+                <div class="mbr-section-btn"><a class="btn btn-md btn-secondary display-4" href="#">LEARN MORE</a>
+                    <a class="btn btn-md btn-white-outline display-4" href="#">LIVE DEMO</a></div>
             </div>
         </div>
     </div>
@@ -173,45 +218,36 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
 </section>
 
 <section class="progress-bars1 cid-rfopiPvt5s" id="progress-bars1-f">
-    
-      
-
-    
 
     <div class="container">
         <h2 class="mbr-section-title pb-2 align-center mbr-fonts-style display-2">
             Temperaturas&nbsp;</h2>
 
-        <h3 class="mbr-section-subtitle pb-5 mbr-fonts-style display-5"><em>DHT11:</em>&nbsp;es un sensor digital de temperatura y humedad relativa de bajo costo y fácil uso. Integra un sensor capacitivo de humedad y un termistor para medir el aire circundante, y muestra los datos mediante una señal digital en el pin de datos.<br></h3>
-
+        <h3 class="mbr-section-subtitle pb-5 mbr-fonts-style display-5"><em style="color:Blue;">DHT11:</em>&nbsp;es un sensor digital de temperatura y humedad relativa de bajo costo y fácil uso. Integra un sensor capacitivo de humedad y un termistor para medir el aire circundante, y muestra los datos mediante una señal digital en el pin de datos.<br></h3>
+         
         <div class="progress_elements">
             <div class="progress1 pb-5">
                 <div class="title-wrap">
-                    <div class="progressbar-title mbr-fonts-style display-7">
-                        <p>T1-DHT11: <?php while($row=mysqli_fetch_assoc($h1)){
-    echo $row['h1'];
-} ?></p>
+                    <div class="progressbar-title mbr-fonts-style display-7 progress-bar-striped progress-bar-animated">
+                        <p>T1-DHT11:    <?php echo $t1  ?> &deg C/ 50 &deg C</p>
                     </div>
                    
                 </div>
-                <progress class="progress progress-primary" max="1500" value="<?php while($row=mysqli_fetch_assoc($h1)){
-    echo $row['h1'];
-} ?>">
+                <progress class="progress progress-primary" max="50" value="<?php echo $t1 ?>">
                 </progress>
+                <h6 style="color:<?php echo $t1_color?>;"><span class="badge badge-warning"> Condicion Actual:</span> <?php echo $t1_condition ?></h6>
             </div>
             
             <div class="progress2 pb-5">
                 <div class="title-wrap">
                     <div class="progressbar-title mbr-fonts-style display-7">
-                        <p>
-                           T2-DHT11</p>
+                    <p>T2-DHT11:    <?php echo $t2 ?> &deg C</p>
                     </div>
                 <div class="progress_value mbr-fonts-style display-7">
-                    <div class="progressbar-number"></div>
-                    <span>%</span>
+                    
                 </div>
                 </div>
-                <progress class="progress progress-primary" max="100" value="80">
+                <progress class="progress progress-primary" max="150" value="<?php echo $t2 ?>">
                 </progress>
             </div>
             
@@ -219,14 +255,13 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
                 <div class="title-wrap">
                     <div class="progressbar-title mbr-fonts-style display-7">
                         <p>
-                            T3-Termo Resistencia</p>
+                            T3-Termo Resistencia:   <?php echo $t3 ?> &deg C</p></p>
                     </div>
                     <div class="progress_value mbr-fonts-style display-7">
-                        <div class="progressbar-number"></div>
-                        <span>%</span>
+                        
                     </div>
                 </div>
-                <progress class="progress progress-primary" max="100" value="90">
+                <progress class="progress progress-primary" max="150" value="<?php echo $t3 ?>">
                 </progress>
             </div>
             
@@ -245,35 +280,40 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
         <h2 class="mbr-section-title pb-2 align-center mbr-fonts-style display-2">
             Temperaturas de Suelo&nbsp;</h2>
 
-        <h3 class="mbr-section-subtitle pb-5 mbr-fonts-style display-5"><em>Sensores YL69:</em> Este sensor tiene la capacidad de medir la humedad del suelo. Aplicando una pequeña tensión entre los terminales del módulo YL-69 hace pasar una corriente que depende básicamente de la resistencia que se genera en el suelo y ésta depende mucho de la humedad. Por lo tanto al aumentar la humedad la corriente crece y al bajar la corriente disminuye.</h3>
+        <h3 class="mbr-section-subtitle pb-5 mbr-fonts-style display-5"><em style="color:blue;">Sensores YL69:</em> Este sensor tiene la capacidad de medir la humedad del suelo. Aplicando una pequeña tensión entre los terminales del módulo YL-69 hace pasar una corriente que depende básicamente de la resistencia que se genera en el suelo y ésta depende mucho de la humedad. Por lo tanto al aumentar la humedad la corriente crece y al bajar la corriente disminuye.</h3>
 
         <div class="progress_elements">
-            <div class="progress1 pb-5">
+        <div class="progress1 pb-5">
                 <div class="title-wrap">
                     <div class="progressbar-title mbr-fonts-style display-7">
-                        <p>H1</p>
+                        <p>
+                        H1
+                        </p>
                     </div>
                     <div class="progress_value mbr-fonts-style display-7">
-                        <div class="progressbar-number"></div>
-                        <span>%</span>
+                        
+                           <h6 style="color:blue;"><?php echo $h1 ?>/1023</h6>
                     </div>
                 </div>
-                <progress class="progress progress-primary" max="1023" value="80">
+                <progress class="progress progress-primary" max="1023" value="<?php echo $h1 ?>">
                 </progress>
+                <h6 style="color:<?php echo $h1_color?>;"><span class="badge badge-warning"> Condicion Actual:</span> <?php echo $h1_condition ?></h6>
             </div>
             
             <div class="progress2 pb-5">
                 <div class="title-wrap">
                     <div class="progressbar-title mbr-fonts-style display-7">
                         <p>
-                           H2</p>
+                        H2
+                        </p>
                     </div>
-                <div class="progress_value mbr-fonts-style display-7">
-                    <div class="progressbar-number"></div>
-                    <span>%</span>
+                    <div class="progress_value mbr-fonts-style display-7">
+                        
+                           <h6 style="color:blue;"><?php echo $h2 ?>/1023</h6>
+                    </div>
                 </div>
-                </div>
-                <progress class="progress progress-primary" max="1500" value="50">
+                <progress class="progress progress-primary" max="1023" value="<?php echo $h2 ?>">
+
                 </progress>
             </div>
             
@@ -285,11 +325,12 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
                         </p>
                     </div>
                     <div class="progress_value mbr-fonts-style display-7">
-                        <div class="progressbar-number"></div>
-                        <span>%</span>
+                        
+                           <h6 style="color:blue;"><?php echo $h3 ?>/1023</h6>
                     </div>
                 </div>
-                <progress class="progress progress-primary" max="100" value="90">
+                <progress class="progress progress-primary" max="1023" value="<?php echo $h3 ?>">
+
                 </progress>
             </div>
             
@@ -313,7 +354,7 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
         <div class="media-container-row pt-5 mt-2">
             <div class="card p-3 align-center">
                 <div class="wrap">
-                    <div class="pie_progress progress1" role="progressbar" data-goal="95">
+                    <div class="pie_progress progress1" role="progressbar" data-goal="<?php echo $hr1 ?>" data-barsize="15">
                         <p class="pie_progress__number mbr-fonts-style display-5"></p>
                     </div>
                 </div> 
@@ -322,17 +363,25 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
                 </div>                 
             </div>
 
-            <div class="media-container-row pt-5 mt-2">
             <div class="card p-3 align-center">
                 <div class="wrap">
-                    <div class="pie_progress progress2" role="progressbar" data-goal="95">
+                    <div class="pie_progress progress2" role="progressbar" data-goal="<?php echo $hr2 ?>" data-barsize="15">
                         <p class="pie_progress__number mbr-fonts-style display-5"></p>
                     </div>
                 </div> 
                 <div class="mbr-crt-title pt-3">
-                    <h4 class="card-title py-2 mbr-fonts-style display-5">HR2</h4>
+                    <h4 class="card-title py-2 mbr-fonts-style display-5">
+                        HR2</h4>
                 </div>                 
             </div>
+
+            
+
+            
+
+            
+
+            
         </div>
 </div></section>
 
@@ -344,27 +393,37 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
       <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">Registros de Temperatura y Humedad</h2>
       <h3 class="mbr-section-subtitle mbr-fonts-style align-center pb-5 mbr-light display-5">
             Se presenta a continuacion los ultimos registros que han sido enviados a la base de datos por parte del dispositivo ESP8266 y su coordinacion con el arduino Uno.</h3>
-            <h3 class="mbr-section-subtitle mbr-fonts-style align-center pb-5 mbr-light display-5">modificando</h3>
       <div class="table-wrapper">
         <div class="container scroll">
-          <table class="table">
+          <table class="table isSearch" cellspacing="0">
             <thead>
-              <tr class="table-dark">   
-                <th class="head-item mbr-fonts-style display-7">ID</th>
-                <th class="head-item mbr-fonts-style display-7">T1</th>
-                <th class="head-item mbr-fonts-style display-7">T2</th>
-                <th class="head-item mbr-fonts-style display-7">T3</th>
-                <th class="head-item mbr-fonts-style display-7">H1</th>
-                <th class="head-item mbr-fonts-style display-7">H2</th>
-                <th class="head-item mbr-fonts-style display-7">H3</th>
-                <th class="head-item mbr-fonts-style display-7">HR1</th>
-                <th class="head-item mbr-fonts-style display-7">HR2</th>
-                <th class="head-item mbr-fonts-style display-7">FECHA</th>
-                <th class="head-item mbr-fonts-style display-7">HORA</th>
-            </tr>
+              <tr class="table-heads ">
+                  
+                  
+                  
+                  
+              <th class="head-item mbr-fonts-style display-7">
+                      ID</th><th class="head-item mbr-fonts-style display-7">
+                      T1</th><th class="head-item mbr-fonts-style display-7">
+                      T2</th><th class="head-item mbr-fonts-style display-7">
+                          T3</th><th class="head-item mbr-fonts-style display-7">
+                              H1</th><th class="head-item mbr-fonts-style display-7">
+                                  H2</th><th class="head-item mbr-fonts-style display-7">
+                                      H3</th><th class="head-item mbr-fonts-style display-7">
+                                          HR1</th><th class="head-item mbr-fonts-style display-7">
+                      HR2</th>
+                      <th class="head-item mbr-fonts-style display-7">
+                      FECHA</th>
+                      <th class="head-item mbr-fonts-style display-7">
+                      HORA</th>
+                      </tr>
             </thead>
 
-            <tbody>            
+            <tbody>
+              
+              
+              
+              
 <?php 
 		$sql="SELECT * FROM ARC ORDER BY ID DESC LIMIT 15";
 		$result=mysqli_query($conexion,$sql);
@@ -382,8 +441,9 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
 			<td><?php echo $mostrar['h3'] ?></td>
 			<td><?php echo $mostrar['hr1'] ?></td>
 			<td><?php echo $mostrar['hr2'] ?></td>
-            <td><?php echo $mostrar['fecha'] ?></td>
-            <td><?php echo $mostrar['hora'] ?></td>
+			<td><?php echo $mostrar['fecha'] ?></td>
+			<td><?php echo $mostrar['hora'] ?></td>
+            
 		</tr>
 	<?php 
 	}
@@ -394,7 +454,7 @@ $hr1=mysqli_query($conexion,"SELECT hr1 FROM ARC ORDER BY ID DESC LIMIT 1") or d
           <div class="row info">
             <div class="col-md-6">
               <div class="dataTables_info mbr-fonts-style display-7">
-                <span class="infoBefore">Mostrando los ultimos 15 nuevos registros.&nbsp;</span>
+                <span class="infoBefore">*Mostrando los ultimos 15 nuevos registros.&nbsp;</span>
                 <span class="inactive infoRows"></span>
                 <span class="infoAfter"></span>
                 <span class="infoFilteredBefore"></span>
