@@ -31,6 +31,30 @@ while($row=mysqli_fetch_assoc($ultimos)){
         $t1_condition="La temperatura es demasiado alta, podria dañar el cultivo!.";
         $t1_color="red";
     } //t2
+    if($t2>=0 && $t2<=18){
+        $t2_condition="El ambiente es demasiado frio en el Area 1.";
+        $t2_color="blue";
+    }
+    elseif($t2>=18 && $t2<40){
+        $t2_condition="El ambiente es propicio en el Area 1.";
+        $t2_color="green";
+    }
+    elseif($t2>40) {
+        $t2_condition="La temperatura es demasiado alta, podria dañar el cultivo!.";
+        $t2_color="red";
+    } //t3
+    if($t3>=0 && $t3<=18){
+        $t3_condition="El ambiente es demasiado frio en el Area 1.";
+        $t3_color="blue";
+    }
+    elseif($t3>=18 && $t3<40){
+        $t3_condition="El ambiente es propicio en el Area 1.";
+        $t3_color="green";
+    }
+    elseif($t3>40) {
+        $t3_condition="La temperatura es demasiado alta, podria dañar el cultivo!.";
+        $t3_color="red";
+    } 
     //valores clave humedades
     if($h1>=200 && $h1<=500){
         $h1_condition="El cultivo esta en riesgo, hay demasiada agua";
@@ -43,7 +67,56 @@ while($row=mysqli_fetch_assoc($ultimos)){
     elseif($h1>900){
         $h1_condition="Al cultivo le hace falta agua. Esta muy seco!";
         $h1_color="orange";
+    }//h2
+    if($h2>=200 && $h2<=500){
+        $h1_condition="El cultivo esta en riesgo, hay demasiada agua";
+        $h1_color="red";
     }
+    elseif($h2>500 && $h2<=900){
+        $h2_condition="El suelo esta humedo, esta en sus valores permitidos";
+        $h2_color="green";
+    }
+    elseif($h2>900){
+        $h2_condition="Al cultivo le hace falta agua. Esta muy seco!";
+        $h2_color="orange";
+    }//h3
+    if($h3>=200 && $h3<=500){
+        $h3_condition="El cultivo esta en riesgo, hay demasiada agua";
+        $h3_color="red";
+    }
+    elseif($h3>500 && $h3<=900){
+        $h3_condition="El suelo esta humedo, esta en sus valores permitidos";
+        $h3_color="green";
+    }
+    elseif($h3>900){
+        $h3_condition="Al cultivo le hace falta agua. Esta muy seco!";
+        $h3_color="orange";
+    }//hr1
+    if($hr1>=0 && $hr1<=20){
+        $hr1_condition="El nivel de humedad, es muy bajo...<br> Puede afectar el crecimiento de las plantas.";
+        $hr1_color="red";
+    }
+    elseif($hr1>20 && $hr1<=50){
+        $hr1_condition="El nivel de Humedad esta a un nivel adecuado para el cultivo!";
+        $hr1_color="green";
+    }
+    elseif($hr1>50){
+        $hr1_condition="Nivel de humedad demasiado alto,<br> el cultivo esta comprometido a perecer.";
+        $hr1_color="orange";
+    }//hr2
+    if($hr2>=0 && $hr2<=20){
+        $hr2_condition="El nivel de humedad, es muy bajo...<br> Puede afectar el crecimiento de las plantas.";
+        $hr2_color="red";
+    }
+    elseif($hr2>20 && $hr2<=50){
+        $hr2_condition="El nivel de Humedad esta a un nivel adecuado para el cultivo!";
+        $hr2_color="green";
+    }
+    elseif($hr2>50){
+        $hr2_condition="Nivel de humedad demasiado alto,<br> el cultivo esta comprometido a perecer.";
+        $hr2_color="orange";
+    }
+    
 ?>
 <!DOCTYPE html>
 <html >
@@ -134,13 +207,11 @@ while($row=mysqli_fetch_assoc($ultimos)){
         <div class="row justify-content-md-center">
             <div class="mbr-white col-md-10">
                 <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1">
-                    iniciando proyecto </h1>
+                Sistema Medidor de Humedad  Relativa y Temperatura</h1>
                 
                 <p class="mbr-text pb-3 mbr-fonts-style display-5">
-                    Click any text to edit or style it. Select text to insert a link. Click blue "Gear" icon in the top right corner to hide/show buttons, text, title and change the block background. Click red "+" in the bottom right corner to add a new block. Use the top left menu to create new pages, sites and add themes.
-                </p>
-                <div class="mbr-section-btn"><a class="btn btn-md btn-secondary display-4" href="#">LEARN MORE</a>
-                    <a class="btn btn-md btn-white-outline display-4" href="#">LIVE DEMO</a></div>
+                Proyecto de IoT realizado atraves de una comunicacion serial entre dispositivo Arduino y modulo Wifi, para un posterior envio de datos a un servidor configurado con web services php.                 <div class="mbr-section-btn"><a class="btn btn-md btn-secondary display-4" href="#">ver PAPER</a>
+                
             </div>
         </div>
     </div>
@@ -249,6 +320,8 @@ while($row=mysqli_fetch_assoc($ultimos)){
                 </div>
                 <progress class="progress progress-primary" max="150" value="<?php echo $t2 ?>">
                 </progress>
+                <h6 style="color:<?php echo $t2_color?>;"><span class="badge badge-warning"> Condicion Actual:</span> <?php echo $t2_condition ?></h6>
+
             </div>
             
             <div class="progress3 pb-5">
@@ -263,6 +336,8 @@ while($row=mysqli_fetch_assoc($ultimos)){
                 </div>
                 <progress class="progress progress-primary" max="150" value="<?php echo $t3 ?>">
                 </progress>
+                <h6 style="color:<?php echo $t3_color?>;"><span class="badge badge-warning"> Condicion Actual:</span> <?php echo $t3_condition ?></h6>
+
             </div>
             
             
@@ -313,8 +388,9 @@ while($row=mysqli_fetch_assoc($ultimos)){
                     </div>
                 </div>
                 <progress class="progress progress-primary" max="1023" value="<?php echo $h2 ?>">
-
                 </progress>
+                <h6 style="color:<?php echo $h2_color?>;"><span class="badge badge-warning"> Condicion Actual:</span> <?php echo $h2_condition ?></h6>
+  
             </div>
             
             <div class="progress3 pb-5">
@@ -330,8 +406,9 @@ while($row=mysqli_fetch_assoc($ultimos)){
                     </div>
                 </div>
                 <progress class="progress progress-primary" max="1023" value="<?php echo $h3 ?>">
-
                 </progress>
+                <h6 style="color:<?php echo $h3_color?>;"><span class="badge badge-warning"> Condicion Actual:</span> <?php echo $h3_condition ?></h6>
+
             </div>
             
             
@@ -349,7 +426,7 @@ while($row=mysqli_fetch_assoc($ultimos)){
         <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">
             Humedad relativa en el aire.</h2>
 
-        <h3 class="mbr-section-subtitle mbr-fonts-style display-5">Captadas atraves de los sensores DHT11, a una altura uniforme del suelo.</h3>
+        <h3 class="mbr-section-subtitle mbr-fonts-style display-5">Captadas atraves de los sensores DHT11, a una altura uniforme del suelo. <br> Valores entre </h3>
     
         <div class="media-container-row pt-5 mt-2">
             <div class="card p-3 align-center">
@@ -360,6 +437,8 @@ while($row=mysqli_fetch_assoc($ultimos)){
                 </div> 
                 <div class="mbr-crt-title pt-3">
                     <h4 class="card-title py-2 mbr-fonts-style display-5">HR1</h4>
+                    <h6 style="color:<?php echo $hr1_color?>;"><span class="badge badge-warning"> Condicion Actual:</span> <?php echo $hr1_condition ?></h6>
+
                 </div>                 
             </div>
 
@@ -372,16 +451,10 @@ while($row=mysqli_fetch_assoc($ultimos)){
                 <div class="mbr-crt-title pt-3">
                     <h4 class="card-title py-2 mbr-fonts-style display-5">
                         HR2</h4>
+                        <h6 style="color:<?php echo $hr2_color?>;"><span class="badge badge-warning"> Condicion Actual:</span> <?php echo $hr2_condition ?></h6>
+
                 </div>                 
             </div>
-
-            
-
-            
-
-            
-
-            
         </div>
 </div></section>
 
@@ -509,7 +582,7 @@ while($row=mysqli_fetch_assoc($ultimos)){
             </div>
             <div class="media-container-row mbr-white">
                 <div class="col-sm-6 copyright">
-                    <p class="mbr-text mbr-fonts-style display-7">FIA-UES, Escuela de Sistemas Informaticos.</p>
+                    <p class="mbr-text mbr-fonts-style display-7">FIA-UES, Escuela de Sistemas Informaticos. <br>Instructor: Ing. Boris Alexander Montano Navarrete</p>
                 </div>
                 <div class="col-md-6">
                     <div class="social-list align-right">
